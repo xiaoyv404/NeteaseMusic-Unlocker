@@ -43,9 +43,9 @@
 
 ## 效果
 
-<img src="https://s1.ax1x.com/2020/08/17/dZf37t.png" width="100">
+<img src="https://s1.ax1x.com/2020/08/17/dZf37t.png" width="100%">
 
-<img src="https://s1.ax1x.com/2020/07/30/aKRrrV.png" width="100">
+<img src="https://s1.ax1x.com/2020/07/30/aKRrrV.png" width="100%">
 
 ## 致谢
 

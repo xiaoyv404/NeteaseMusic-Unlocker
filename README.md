@@ -22,6 +22,10 @@
 
 4. 完成
 
+## 注意！！！
+
+本软件为个人开发软件，没用给360等杀毒软件厂商交保护费，请自行添加信任！在运行脚本时请退出杀毒软件！
+
 ## 已知bug
 
 1. 无法设置音效
@@ -39,9 +43,9 @@
 
 ## 效果
 
-<img src="https://s1.ax1x.com/2020/08/02/aYiijK.md.png" width="100%">
+< img  src = “ https://s1.ax1x.com/2020/08/17/dZf37t.png ”  宽度 = “ 100％” >
 
-<img src="https://s1.ax1x.com/2020/07/30/aKRrrV.png" width="100%">
+< img  src = “ https://s1.ax1x.com/2020/07/30/aKRrrV.png ”  width = “ 100％” >
 
 ## 致谢
 

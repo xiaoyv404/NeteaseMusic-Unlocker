@@ -57,6 +57,7 @@ goto mouse
 :start 
 cls
 for /f "tokens=2* " %%i in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Netease\cloudmusic" /v "install_dir"') do set software=%%j
+for /f "tokens=2* " %%i in ('reg query "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Desktop"') do set Dsektop=%%j
 if "%software%"=="" ( goto nosoftware ) else ( goto node )
 :nosoftware
 cls
@@ -71,7 +72,6 @@ pause
 node --version
 if %ERRORLEVEL% == 0 ( goto next ) else ( goto nonode )
 :nonode
-cls
 echo.
 echo 正在写入Node.js
 7za.exe x node.7z -aoa -o"%software%"
@@ -84,7 +84,6 @@ if %ERRORLEVEL% == 0 ( goto next ) else (
     exit
  )
 :next
-cls
 echo.
 echo 正在写入主文件
 7za.exe x NMUFiles.7z -aoa -o"%software%"
@@ -98,22 +97,47 @@ if %ERRORLEVEL% == 0 ( goto 1 ) else (
  )
 :1
 echo 正在创建桌面快捷方式
-for /f "tokens=2* " %%i in ('reg query "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Desktop"') do set Dsektop=%%j
-del C:\Users\Public\Desktop\网易云音乐.lnk
-echo set WshShell = WScript.CreateObject("WScript.Shell") >> Shortcut.vbs
-echo set oShellLink = WshShell.CreateShortcut("%Dsektop%\网易云音乐.lnk") >> Shortcut.vbs
-echo oShellLink.TargetPath = "%software%\Start.exe" >> Shortcut.vbs
-echo oShellLink.WindowStyle = 1 >> Shortcut.vbs
-echo oShellLink.IconLocation = "%software%\cloudmusic.exe, 0" >> Shortcut.vbs
-echo oShellLink.Description = "网易云音乐" >> Shortcut.vbs
-echo oShellLink.WorkingDirectory = "%software%" >> Shortcut.vbs
-echo oShellLink.Save >> Shortcut.vbs
-Vbs_To_Exe /vbs Shortcut.vbs /exe Shortcut.exe /uac-admin
-timeout /t 1 /NOBREAK > nul
-start Shortcut.exe
-timeout /t 1 /NOBREAK > nul
-del Shortcut.vbs
-del Shortcut.exe
+del "C:\Users\Public\Desktop\网易云音乐.lnk"
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\网易云音乐.lnk"
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\网易云音乐\网易云音乐.lnk"
+echo set WshShell = WScript.CreateObject("WScript.Shell") >> Shortcut1.vbs
+echo set oShellLink = WshShell.CreateShortcut("%Dsektop%\网易云音乐.lnk") >> Shortcut1.vbs
+echo oShellLink.TargetPath = "%software%\Start.exe" >> Shortcut1.vbs
+echo oShellLink.WindowStyle = 1 >> Shortcut1.vbs
+echo oShellLink.IconLocation = "%software%\cloudmusic.exe, 0" >> Shortcut1.vbs
+echo oShellLink.Description = "网易云音乐" >> Shortcut1.vbs
+echo oShellLink.WorkingDirectory = "%software%" >> Shortcut1.vbs
+echo oShellLink.Save >> Shortcut1.vbs
+echo set WshShell = WScript.CreateObject("WScript.Shell") >> Shortcut2.vbs
+echo set oShellLink = WshShell.CreateShortcut("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\网易云音乐.lnk") >> Shortcut2.vbs
+echo oShellLink.TargetPath = "%software%\Start.exe" >> Shortcut2.vbs
+echo oShellLink.WindowStyle = 1 >> Shortcut2.vbs
+echo oShellLink.IconLocation = "%software%\cloudmusic.exe, 0" >> Shortcut2.vbs
+echo oShellLink.Description = "网易云音乐" >> Shortcut2.vbs
+echo oShellLink.WorkingDirectory = "%software%" >> Shortcut2.vbs
+echo oShellLink.Save >> Shortcut2.vbs
+echo set WshShell = WScript.CreateObject("WScript.Shell") >> Shortcut3.vbs
+echo set oShellLink = WshShell.CreateShortcut("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\网易云音乐\网易云音乐.lnk") >> Shortcut3.vbs
+echo oShellLink.TargetPath = "%software%\Start.exe" >> Shortcut3.vbs
+echo oShellLink.WindowStyle = 1 >> Shortcut3.vbs
+echo oShellLink.IconLocation = "%software%\cloudmusic.exe, 0" >> Shortcut3.vbs
+echo oShellLink.Description = "网易云音乐" >> Shortcut3.vbs
+echo oShellLink.WorkingDirectory = "%software%" >> Shortcut3.vbs
+echo oShellLink.Save >> Shortcut3.vbs
+Vbs_To_Exe /vbs Shortcut1.vbs /exe Shortcut1.exe /uac-admin
+Vbs_To_Exe /vbs Shortcut2.vbs /exe Shortcut2.exe /uac-admin
+Vbs_To_Exe /vbs Shortcut3.vbs /exe Shortcut3.exe /uac-admin
+timeout /t 5 /NOBREAK > nul
+start Shortcut1.exe
+start Shortcut2.exe
+start Shortcut3.exe
+timeout /t 3 /NOBREAK > nul
+del Shortcut1.vbs
+del Shortcut2.vbs
+del Shortcut3.vbs
+del Shortcut1.exe
+del Shortcut2.exe
+del Shortcut3.exe
 echo 正在更改设置代理服务器设置
 start /B killcloudmusic.bat
 "%software%\cloudmusic.exe"
